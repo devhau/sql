@@ -51,11 +51,9 @@
             const sql = e.target.value;
             let result = sql.replace(/`/gi, '');
             result = result.split( /, (?![^()]*\))/).map(item => {
-                for (let i = 0; i < funcs.length; i++) {
-                    if ((/\(.*?\)/).test(item)) {
+                 if ((/\(.*?\)/).test(item)) {
                         return `DB::raw('${item.trim()}')`;
                     }
-                }
                 return `'${item.trim()}'`;
             }).join(',\n');
             output.innerText = result;
