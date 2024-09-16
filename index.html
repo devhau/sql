@@ -50,7 +50,7 @@
         input.addEventListener('input', function (e) {
             const sql = e.target.value;
             let result = sql.replace(/`/gi, '');
-            result = result.split( /, (?![^()]*\))/).map(item => {
+            result = result.split(/,\s*(?=(?:[^()]*\([^()]*\))*[^()]*$)/).map(item => {
                  if ((/\(.*?\)/).test(item)) {
                         return `DB::raw('${item.trim()}')`;
                     }
